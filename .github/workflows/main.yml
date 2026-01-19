@@ -34,9 +34,9 @@ jobs:
           JFROG_USER: ${{ secrets.JFROG_USER }}
           JFROG_PASS: ${{ secrets.JFROG_PASS }}
         run: |
-          uv publish \
-            --check-url "https://${JFROG_USER}:${JFROG_PASS}@mill.jfrog.info:12176/artifactory/api/pypi/pypi-local/simple" \
+          uv publish -v \
+            --check-url "https://${JFROG_USER}:${JFROG_PASS}@mill.jfrog.info:12176/artifactory/api/pypi/pypi-local" \
             --username "${JFROG_USER}" \
             --password "${JFROG_PASS}" \
-            --publish-url "https://mill.jfrog.info:12176/artifactory/api/pypi/pypi-local" \
+            --publish-url "https://mill.jfrog.info:12176/artifactory/api/pypi/pypi-local/" \
             dist/*
