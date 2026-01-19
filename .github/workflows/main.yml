@@ -9,7 +9,7 @@ on:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted 
 
     steps:
       - name: Checkout code
@@ -29,6 +29,6 @@ jobs:
           uv build
       - name: Curl connectivity test
         run: |
-          curl -vk https://hts2.jforg.io/artifactory/api/system/ping
+          curl -vk http://localhost:8081/artifactory/api/system/ping
 
     
