@@ -27,8 +27,24 @@ jobs:
         working-directory: my-python-package
         run: |
           uv build
+     
       - name: Curl connectivity test
         run: |
           curl -vk http://localhost:8081/artifactory/api/system/ping
+
+      - name: Publish to Artifactory
+        working-directory: my-python-package
+        env:
+          JFROG_USER: ${{ secrets.JFROG_USER }}
+          JFROG_PASS: ${{ secrets.JFROG_PASS }}
+        run: |
+          uv publish -v \
+            --check-url "https://${JFROG_USER}:${JFROG_PASS}@mill.jfrog.info:12176/artifactory/api/pypi/pypi-local/simple" \
+            --username "${JFROG_USER}" \
+            --password "${JFROG_PASS}" \
+            --publish-url "https://mill.jfrog.info:12176/artifactory/api/pypi/pypi-local/" \
+            dist/*
+
+          
 
     
