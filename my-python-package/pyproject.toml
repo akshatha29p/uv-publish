@@ -1,0 +1,13 @@
+[project]
+name = "my-python-package"
+version = "0.1.0"
+description = "Sample Python package published to Artifactory"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name="test-user", email="test@test.com" }
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
