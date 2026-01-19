@@ -29,6 +29,6 @@ jobs:
           uv build
       - name: Curl connectivity test
         run: |
-          curl -vk https://hts.jforg.io/artifactory/api/system/ping
+          curl -vk https://hts2.jforg.io/artifactory/api/system/ping
 
     
