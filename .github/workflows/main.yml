@@ -27,6 +27,9 @@ jobs:
         working-directory: my-python-package
         run: |
           uv build
+      - name: Curl connectivity test
+        run: |
+          curl -vk https://jfrog.info:12176/artifactory/api/system/ping
 
       - name: Publish to Artifactory
         working-directory: my-python-package
