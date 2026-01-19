@@ -1,0 +1,40 @@
+name: Publish Python package to Artifactory
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Build package
+        run: |
+          uv build
+
+      - name: Publish to Artifactory
+        env:
+          JFROG_USER: ${{ secrets.JFROG_USER }}
+          JFROG_PASS: ${{ secrets.JFROG_PASS }}
+        run: |
+          uv publish \
+            --check-url "https://${JFROG_USER}:${JFROG_PASS}@artifacts.com/artifactory/api/pypi/cat-digital-pypi-local/simple" \
+            --username "${JFROG_USER}" \
+            --password "${JFROG_PASS}" \
+            --publish-url "https://mill.jfrog.info:12176/artifactory/api/pypi/pypi-local" \
+            dist/*
