@@ -29,6 +29,6 @@ jobs:
           uv build
       - name: Curl connectivity test
         run: |
-          curl -vk https://mill.jfrog.info:12176/artifactory/api/system/ping
+          curl -vk http://mill.jfrog.info:32820/artifactory/api/system/ping
 
     
